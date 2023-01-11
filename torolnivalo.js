@@ -8,13 +8,13 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-let emptySquares = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+let emptySquares = ["", "", "", "", "", "", "", "", ""];
 
 function computerTurnh2() {
   if (emptySquares[4] !== "X" && emptySquares[4] !== "0") {
     emptySquares[4] = "0";
   } else if (emptySquares[4] === "0" || emptySquares[4] === "X") {
-    const lines = [
+    let lines = [
       [0, 1, 2],
       [3, 4, 5],
       [6, 7, 8],
@@ -30,29 +30,61 @@ function computerTurnh2() {
       if (
         emptySquares[a] === "X" &&
         emptySquares[b] === "X" &&
-        emptySquares[c] === ""
+        emptySquares[c] === "" &&
+        emptySquares[c] !== "0"
       ) {
         emptySquares[c] = "0";
 
-        return true;
+        console.log("Check my dick 1");
+        break;
       } else if (
         emptySquares[b] === "X" &&
         emptySquares[c] === "X" &&
-        emptySquares[a] === ""
+        emptySquares[a] === "" &&
+        emptySquares[a] !== "0"
       ) {
         emptySquares[a] = "0";
 
-        return true;
+        console.log("Check my dick 2");
+        break;
       } else if (
         emptySquares[a] === "X" &&
         emptySquares[c] === "X" &&
-        emptySquares[b] === ""
+        emptySquares[b] === "" &&
+        emptySquares[b] !== "0"
       ) {
         emptySquares[b] = "0";
 
-        return true;
-      } else computerTurne();
-      return true;
+        console.log("Check my dick 3 ");
+        break;
+      } else if (
+        emptySquares[a] === "0" &&
+        emptySquares[c] === "0" &&
+        emptySquares[b] === "" &&
+        emptySquares[b] !== "0"
+      ) {
+        emptySquares[b] = "0";
+        console.log("Check my dick 4");
+        break;
+      } else if (
+        emptySquares[b] === "0" &&
+        emptySquares[c] === "0" &&
+        emptySquares[a] === "" &&
+        emptySquares[a] !== "0"
+      ) {
+        emptySquares[a] = "0";
+        console.log("Check my dick 5 ");
+        break;
+      } else if (
+        emptySquares[a] === "0" &&
+        emptySquares[b] === "0" &&
+        emptySquares[c] === "" &&
+        emptySquares[c] !== "0"
+      ) {
+        emptySquares[c] = "0";
+        console.log("Check my dick 6");
+        break;
+      }
     }
   }
   console.log(getTable(emptySquares));
