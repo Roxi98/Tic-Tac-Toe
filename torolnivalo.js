@@ -3,6 +3,7 @@ const { randomIntBetweenTwoNumbers, getTable } = require("./funkciok");
 const readline = require("readline");
 const { truncate } = require("fs");
 const { count } = require("console");
+const { resolve } = require("path");
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -26,16 +27,40 @@ function computerTurnh2() {
     ];
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
-
       if (
+        emptySquares[a] === "0" &&
+        emptySquares[c] === "0" &&
+        emptySquares[b] === "" &&
+        emptySquares[b] !== "0"
+      ) {
+        emptySquares[b] = "0";
+
+        break;
+      } else if (
+        emptySquares[b] === "0" &&
+        emptySquares[c] === "0" &&
+        emptySquares[a] === "" &&
+        emptySquares[a] !== "0"
+      ) {
+        emptySquares[a] = "0";
+
+        break;
+      } else if (
+        emptySquares[a] === "0" &&
+        emptySquares[b] === "0" &&
+        emptySquares[c] === "" &&
+        emptySquares[c] !== "0"
+      ) {
+        emptySquares[c] = "0";
+
+        break;
+      } else if (
         emptySquares[a] === "X" &&
         emptySquares[b] === "X" &&
         emptySquares[c] === "" &&
         emptySquares[c] !== "0"
       ) {
         emptySquares[c] = "0";
-
-        console.log("Check my dick 1");
         break;
       } else if (
         emptySquares[b] === "X" &&
@@ -45,7 +70,6 @@ function computerTurnh2() {
       ) {
         emptySquares[a] = "0";
 
-        console.log("Check my dick 2");
         break;
       } else if (
         emptySquares[a] === "X" &&
@@ -55,36 +79,40 @@ function computerTurnh2() {
       ) {
         emptySquares[b] = "0";
 
-        console.log("Check my dick 3 ");
         break;
       } else if (
-        emptySquares[a] === "0" &&
-        emptySquares[c] === "0" &&
-        emptySquares[b] === "" &&
-        emptySquares[b] !== "0"
+        emptySquares[2] !== "X" &&
+        emptySquares[2] !== "0" &&
+        emptySquares[4] === "0"
       ) {
-        emptySquares[b] = "0";
-        console.log("Check my dick 4");
+        emptySquares[2] = "0";
         break;
       } else if (
-        emptySquares[b] === "0" &&
-        emptySquares[c] === "0" &&
-        emptySquares[a] === "" &&
-        emptySquares[a] !== "0"
+        emptySquares[6] !== "X" &&
+        emptySquares[6] !== "0" &&
+        emptySquares[4] === "0"
       ) {
-        emptySquares[a] = "0";
-        console.log("Check my dick 5 ");
-        break;
-      } else if (
-        emptySquares[a] === "0" &&
-        emptySquares[b] === "0" &&
-        emptySquares[c] === "" &&
-        emptySquares[c] !== "0"
-      ) {
-        emptySquares[c] = "0";
-        console.log("Check my dick 6");
+        emptySquares[6] = "0";
         break;
       }
+    }
+    const countX = emptySquares.filter((x) => {
+      if (x === "X") {
+        return true;
+      } else {
+        return false;
+      }
+    }).length;
+    const countO = emptySquares.filter((x) => {
+      if (x === "0") {
+        return true;
+      } else {
+        return false;
+      }
+    }).length;
+
+    if (countX > countO) {
+      computerTurne();
     }
   }
   console.log(getTable(emptySquares));
