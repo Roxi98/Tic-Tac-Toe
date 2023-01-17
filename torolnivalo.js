@@ -80,7 +80,7 @@ function computerTurnh2() {
         emptySquares[b] = "0";
 
         break;
-      } else if (
+      } /*else if (
         emptySquares[2] !== "X" &&
         emptySquares[2] !== "0" &&
         emptySquares[4] === "0"
@@ -94,7 +94,7 @@ function computerTurnh2() {
       ) {
         emptySquares[6] = "0";
         break;
-      }
+      }*/
     }
     const countX = emptySquares.filter((x) => {
       if (x === "X") {

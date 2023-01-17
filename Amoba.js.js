@@ -1,4 +1,8 @@
-const { randomIntBetweenTwoNumbers, getTable } = require("./funkciok");
+const {
+  randomIntBetweenTwoNumbers,
+  getTable,
+  computerTurnh2,
+} = require("./funkciok");
 
 const readline = require("readline");
 
@@ -7,21 +11,21 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
-let emptySquares = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-/*function gameMode(mode) {
+
+let emptySquares = ["", "", "", "", "", "", "", "", ""];
+function gameMode() {
   return new Promise((resolve, reject) => {
-    rl.question(
-      "Choose between normal mode and hard mode please  ",
-      (answer) => {
-        if (answer.toLowerCase() === "normal mode") {
-          console.log("Normal mode");
-        } else if (answer.toLowerCase() === "hard mode") {
-          console.log("Hard mode");
-        }
+    rl.question("Do you want hard mode? Yes or no?  ", (answer) => {
+      if (answer.toLowerCase() === "no") {
+        console.log("Normal mode");
+        resolve(false);
+      } else if (answer.toLowerCase() === "yes") {
+        console.log("Hard mode");
+        resolve(true);
       }
-    );
+    });
   });
-}*/
+}
 
 function introQuestion(end) {
   return new Promise((resolve, reject) => {
@@ -98,7 +102,7 @@ function computerTurne() {
 const turnQuestion = (playerStart) => {
   return new Promise((resolve, reject) => {
     if (playerStart === true) {
-      rl.question("Place your X in square 1-9 ", (answer) => {
+      rl.question("Place your X in square ", (answer) => {
         if (
           emptySquares[answer - 1] !== "0" &&
           emptySquares[answer - 1] !== "X"
@@ -135,7 +139,7 @@ const turnQuestion = (playerStart) => {
       }
 
       winCheck(resolve);
-      rl.question("Place your X in square 1-9 ", (answer) => {
+      rl.question("Place your X in square ", (answer) => {
         if (
           emptySquares[answer - 1] !== "0" &&
           emptySquares[answer - 1] !== "X"
@@ -154,12 +158,16 @@ const turnQuestion = (playerStart) => {
 };
 
 async function game() {
-  const playerStart = await introQuestion();
+  const hmode = await gameMode();
+  if (hmode === false) {
+    const playerStart = await introQuestion();
 
-  let end = false;
-  do {
-    end = await turnQuestion(playerStart);
-  } while (end === false);
+    let end = false;
+    do {
+      end = await turnQuestion(playerStart);
+    } while (end === false);
+  } else if (hmode === true) {
+  }
   rl.close();
 }
 
