@@ -205,7 +205,7 @@ function computerTurne() {
   console.log(getTable(emptySquares));
 }
 
-const turnQuestion = (playerStart) => {
+const turnQuestion2 = (playerStart) => {
   return new Promise((resolve, reject) => {
     if (playerStart === true) {
       rl.question("Place your X in square 1-9 ", (answer) => {
